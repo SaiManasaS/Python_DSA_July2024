@@ -241,7 +241,7 @@ class LinkedList:
         return self.head
     '''
 
-    def merge_sorted(self, llist):
+    def merge_sorted1(self, llist):
         p1 = None
         p2 = None
         q = self.head
@@ -295,6 +295,91 @@ class LinkedList:
 
         self.head = new_head     
         return self.head
+
+    def merge_sorted_didnotwork_July2024(self, llist):
+        p1 = None
+        p2 = None
+        q = self.head
+        p = llist.head
+        s = None
+
+        if p.data <= q.data:
+            s = p
+            '''s.next = q'''
+            '''p = p.next'''
+        else:
+            s = q
+            '''s.next = p'''
+            '''q = q.next'''
+        new_head = s
+        
+
+        print("self.head", self.head)
+        print("q", q)
+        print("llist.head", llist.head)
+        print("p", p)
+
+        '''while q is not None and p is not None:
+            print('In while(), p:', p.data)
+            print('In while(), q:', q.data)
+            if p.data <= q.data:
+                s = p
+                temp = p.next
+                s.next = q
+                p = temp
+                #print('p:', p.data)
+            else:
+                s = q
+                temp = q.next
+                s.next = p
+                temp = q
+                q = temp
+                print('q:', q.data)
+                q.print_list()
+        '''
+            
+            
+        '''if s == temp and q is None and p is not None:'''
+        if q is None and p is not None:
+            s.next = p
+
+        if p is None and q is not None:
+            s.next = q
+
+        '''p.print_list()
+        q.print_list()'''
+
+        self.head = new_head     
+        return self.head
+
+    def merge_sorted(self, llist):
+        p1 = None
+        p2 = None
+        c1 = self.head
+        c2 = llist.head
+        s = None
+        new_head = self.head
+
+        while c1 is not None and c2 is not None:
+            print('In while(), c1:', c1.data)
+            print('In while(), c2:', c2.data)
+            if c1.data <= c2.data:
+                p1 = c1
+                next_c1 = c1.next
+                if p2 is not None:
+                    p2.next = c1
+                c1.next = c2
+                c1 = next_c1
+            else:
+                p2 = c2
+                c2 = c2.next
+            
+        if c1 is None and c2 is not None:
+            p1.next = c2
+        elif c1 is not None and c2 is None:
+            p2.next = c1
+
+        self.head = new_head
 
 llist_1 = LinkedList()
 llist_2 = LinkedList()
