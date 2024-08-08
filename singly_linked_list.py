@@ -381,6 +381,91 @@ class LinkedList:
 
         self.head = new_head
 
+#Finally this is working on Aug 8th
+    def remove_duplicates(self):
+        
+        num_rep_dict = {}
+        cur = self.head
+        prev = None
+
+        while cur is not None:
+            if cur.data in num_rep_dict:
+                if num_rep_dict[cur.data] > 1:
+                    temp_next = cur.next
+                    if prev is not None:
+                        prev.next = cur.next
+                        cur = temp_next
+                num_rep_dict[cur.data] = num_rep_dict[cur.data] + 1
+            else:
+                num_rep_dict[cur.data] = 1
+            cur = cur.next
+
+        print("num_rep_dict: ", num_rep_dict)
+
+        cur = self.head
+        print("cur.data self.head: ", cur.data)
+
+        while cur is not None:
+            print("cur.data: ", cur.data)
+            if num_rep_dict[cur.data] > 1:
+                if cur == self.head:
+                    print("if Line 326, num_rep_dict[cur.data]:", num_rep_dict[cur.data])
+                    num_rep_dict[cur.data] = num_rep_dict[cur.data] - 1
+                    self.head = cur.next
+                    prev = self.head
+                    cur = cur.next
+                else:
+                    print("else Line 332")
+                    num_rep_dict[cur.data] = num_rep_dict[cur.data] - 1
+                    prev.next = cur.next
+                    cur = cur.next
+                    '''prev = cur'''
+                print("num_rep_dict[cur.data]:", num_rep_dict[cur.data])
+            else:
+                print("else Line 339")
+                prev = cur
+                cur = cur.next
+        
+        print("2nd num_rep_dict: ", num_rep_dict)
+       
+        '''num_rep_hastab = [[]]
+        
+        cur = self.head
+
+        while cur is not None:
+            num_rep_hastab[cur.data] = 0
+
+        while cur is not None:
+            if num_rep_hastab[cur.data]:
+                num_rep_hastab[cur.data] = num_rep_hastab[cur.data] + 1
+            else:
+                num_rep_hastab[cur.data] = 0
+        
+        cur = self.head
+        prev = None
+        while cur is not None:
+            prev = cur
+            self.head = prev
+            if num_rep_dict[cur.data] > 1:
+                prev = cur
+                num_rep_dict[cur.data] = num_rep_dict[cur.data] - 1
+                next_cur = cur.next
+                cur.next = None
+                prev.next = None
+                cur = next_cur
+                self.head = cur
+                prev = cur
+            else:
+                self.head = cur
+                self.head = prev
+                cur = cur.next
+        '''
+            
+
+        print("2nd num_rep_dict: ", num_rep_dict)
+
+        return self.head
+
 llist_1 = LinkedList()
 llist_2 = LinkedList()
 
